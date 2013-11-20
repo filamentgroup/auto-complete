@@ -1,10 +1,10 @@
 /*
- * component
+ * simple auto-enhance component skeleton
  * Copyright (c) 2013 Filament Group, Inc.
  * Licensed under MIT
  */
 
-(function( w, $ ){
+(function( $ ){
 
 	var pluginName = "plugin-name-here",
 		enhancedAttr = "data-enhanced",
