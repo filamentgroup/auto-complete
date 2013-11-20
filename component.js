@@ -10,7 +10,7 @@
 		enhancedAttr = "data-enhanced",
 		initSelector = "." + componentName + ":not([" + enhancedAttr + "])";
 
-	$.fn[ componentName ] = function( $input ){
+	$.fn[ componentName ] = function(){
 		return this.each( function(){
 			// make enhancements here
 		});
@@ -18,7 +18,7 @@
 
 	// auto-init on enhance (which is called on domready)
 	$( document ).bind( "enhance", function( e ){
-		$( initSelector, e.target )[ componentName ]().attr( "data-enhanced", true );
+		$( initSelector, e.target )[ componentName ]().attr( enhancedAttr, true );
 	});
 
 }( jQuery ));
