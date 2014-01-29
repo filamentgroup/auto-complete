@@ -18,7 +18,8 @@
 
 	// auto-init on enhance (which is called on domready)
 	$( document ).bind( "enhance", function( e ){
-		$( initSelector, e.target )[ componentName ]().attr( enhancedAttr, true );
+		var $sel = $( e.target ).is( initSelector ) ? $( e.target ) : $( initSelector, e.target );
+		$sel[ componentName ]().attr( enhancedAttr, "true" );
 	});
 
 }( jQuery ));
