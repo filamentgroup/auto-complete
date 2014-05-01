@@ -20,9 +20,7 @@
       }
 
       if( $this.is("[data-autocomplete]") ){
-        //TODO move the url grab into the constructor
-        url = $this.attr( "data-autocomplete" );
-        autocomplete = new w.componentNamespace.AutoComplete( this, menu, url );
+        autocomplete = new w.componentNamespace.AutoComplete( this, menu );
       } else {
         autocomplete = new w.componentNamespace.AutoCompleteDom( this, menu );
 

@@ -5,7 +5,7 @@
 
   w.componentNamespace = w.componentNamespace || {};
 
-  var AutoComplete = w.componentNamespace.AutoComplete = function( element, menu, url ){
+  var AutoComplete = w.componentNamespace.AutoComplete = function( element, menu ){
     // assign element for method events
     this.$element = this.$input = $( element );
 
@@ -22,7 +22,7 @@
       this.ignoreKeycodes.push( parseInt(key, 10) );
     }, this));
 
-    this.url = url;
+    this.url = this.$element.attr( "data-autocomplete" );
 
     this.$input.data( "autocomplete-component", this );
     this.$input.attr( "autocomplete", "off" );
