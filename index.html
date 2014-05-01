@@ -29,8 +29,16 @@
   </head>
   <body>
     <div class="autocomplete-docs">
-      <h1 class="docs">Auto-complete</h2>
-      <p class="docs-intro">An input with auto-complete.</p>
+      <h1 class="docs">Demos</h2>
+      <p class="docs-intro">An input with auto-complete. <b>NOTE:</b> The data being served is a static mockup.</p>
+
+    <pre>
+&lt;<span class="function-name">input</span> <span class="variable-name">type</span>=<span class="string">"text"</span> <span class="variable-name">data-autocomplete</span>=<span class="string">"demo.json"</span> <span class="variable-name">aria-controls</span>=<span class="string">"list"</span> <span class="variable-name">aria-haspopup</span>=<span class="string">"true"</span>&gt;
+&lt;<span class="function-name">div</span> <span class="variable-name">class</span>=<span class="string">"suggest menu"</span> data-menu&gt;
+  &lt;<span class="function-name">ol</span>&gt;
+  &lt;/<span class="function-name">ol</span>&gt;
+&lt;/<span class="function-name">div</span>&gt;
+</pre>
 
       <input type="text" data-autocomplete="demo.json" aria-controls="list" aria-haspopup="true">
       <div class="suggest menu" data-menu>
@@ -40,7 +48,24 @@
 
       <h2 class="docs">Auto-complete with Select</h2>
 
-      <p class="docs">An input with auto-complete. <b>NOTE:</b> The data is being served is a static mockup.</p>
+      <p class="docs">An input with auto-complete where the data is pulled from the children of an associated DOM element. Here the DOM element is a select menu.</p>
+
+    <pre>
+&lt;<span class="function-name">label</span> <span class="variable-name">class</span>=<span class="string">"autocomplete"</span>&gt;
+  &lt;<span class="function-name">input</span> <span class="variable-name">type</span>=<span class="string">"text"</span> <span class="variable-name">data-autocomplete-dom</span>=<span class="string">"#categories"</span> <span class="variable-name">aria-controls</span>=<span class="string">"list"</span> <span class="variable-name">aria-haspopup</span>=<span class="string">"true"</span>&gt;
+  &lt;<span class="function-name">div</span> <span class="variable-name">class</span>=<span class="string">"suggest menu"</span> data-menu&gt;
+    &lt;<span class="function-name">ol</span>&gt;
+    &lt;/<span class="function-name">ol</span>&gt;
+  &lt;/<span class="function-name">div</span>&gt;
+&lt;/<span class="function-name">label</span>&gt;
+
+&lt;<span class="function-name">select</span> <span class="variable-name">id</span>=<span class="string">"categories"</span>&gt;
+  &lt;<span class="function-name">option</span>&gt;Foo&lt;/<span class="function-name">option</span>&gt;
+  &lt;<span class="function-name">option</span>&gt;Bar&lt;/<span class="function-name">option</span>&gt;
+  &lt;<span class="function-name">option</span>&gt;Baz&lt;/<span class="function-name">option</span>&gt;
+  &lt;<span class="function-name">option</span>&gt;Bak&lt;/<span class="function-name">option</span>&gt;
+&lt;/<span class="function-name">select</span>&gt;
+</pre>
 
       <label class="autocomplete">
         <input type="text" data-autocomplete-dom="#categories" aria-controls="list" aria-haspopup="true">
@@ -53,16 +78,15 @@
       <div class="btn btn-primary btn-select">
         <span class="ki-icon ki-icon-carat-down"></span>
         <select id="categories">
-          <option>Default Option</option>
-          <option>Option 1</option>
-          <option>Option 2</option>
-          <option>Option 3</option>
-          <option>This is a really long option that will be truncated.</option>
+          <option>Foo</option>
+          <option>Bar</option>
+          <option>Baz</option>
+          <option>Bak</option>
         </select>
       </div>
 
       <h2 class="docs">JSON response</h3>
-      <p class="docs">The response from the server should be an array of strings matching the value of the input</p>
+      <p class="docs">The response from the server should be an array of strings matching the value of the input.</p>
       <pre><code>
 [
   "foo",
