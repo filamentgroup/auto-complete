@@ -1,16 +1,15 @@
-Component
-=========
+# Auto-complete
 
-Just a simple auto-enhance-able component skeleton. It's not a widget factory, just for simple stuff. 
+## AUTO-complete
 
-Start by setting the `componentName` var to whatever the class name of your component happens to be (without the `.`). Then drop your typical logic into the each statement.
+## Dependencies
 
-The script will auto-initialize your component whenever an `enhance` event is triggered on a parent element. 
+## Setup
 
 We typically add this to kick things off when the DOM is ready:
 
 ``` js
-$( function(){ $( document ).trigger( "enhance" ); } );  
+$( function(){ $( document ).trigger( "enhance" ); } );
 ```
 
  ...and then trigger `enhance` on newly appended markup as well.

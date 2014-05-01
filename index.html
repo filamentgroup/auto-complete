@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script src="lib/jquery-1.11.1.js"></script>
+    <script src="lib/menu.js"></script>
+    <script src="src/core.js"></script>
+    <script src="src/dom.js"></script>
+    <script src="src/init.js"></script>
+  </head>
+  <body>
+    <div class="autocomplete-docs">
+      <h2 class="docs">Auto-complete</h2>
+      <p class="docs-intro">An input with auto-complete.</p>
+
+      <input type="text" data-autocomplete="demo.json" aria-controls="list" aria-haspopup="true">
+      <div class="suggest menu" data-menu>
+        <ol>
+        </ol>
+      </div>
+
+      <h2 class="docs">Auto-complete with Select</h2>
+
+      <p class="docs-intro">An input with auto-complete. <b>NOTE:</b> that the wrapper label here is just used for tidiness the styling and position of the select and input maybe be different in implementation.</p>
+
+      <label class="autocomplete">
+        <input type="text" data-autocomplete-dom="#categories" aria-controls="list" aria-haspopup="true">
+        <div class="suggest menu" data-menu>
+          <ol>
+          </ol>
+        </div>
+      </label>
+
+      <div class="btn btn-primary btn-select">
+        <span class="ki-icon ki-icon-carat-down"></span>
+        <select id="categories">
+          <option>Default Option</option>
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+          <option>This is a really long option that will be truncated.</option>
+        </select>
+      </div>
+
+      <h3 class="docs">Dependencies</h3>
+      <ul class="docs">
+        <li>None</li>
+      </ul>
+    </div>
+</body>
+</html>
