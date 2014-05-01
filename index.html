@@ -6,10 +6,30 @@
     <script src="src/core.js"></script>
     <script src="src/dom.js"></script>
     <script src="src/init.js"></script>
+    <link rel="stylesheet" href="/lib/menu.css">
+    <style type="text/css" media="screen">
+      .menu {
+        background-color: white;
+        box-sizing: border-box;
+        border: 1px solid black;
+        width: 10em;
+      }
+
+      .menu ul, .menu ol {
+        list-style: none;
+        padding: 5px;
+        margin: 0;
+      }
+
+      input {
+        box-sizing: border-box;
+        width: 10em;
+      }
+    </style>
   </head>
   <body>
     <div class="autocomplete-docs">
-      <h2 class="docs">Auto-complete</h2>
+      <h1 class="docs">Auto-complete</h2>
       <p class="docs-intro">An input with auto-complete.</p>
 
       <input type="text" data-autocomplete="demo.json" aria-controls="list" aria-haspopup="true">
@@ -20,7 +40,7 @@
 
       <h2 class="docs">Auto-complete with Select</h2>
 
-      <p class="docs-intro">An input with auto-complete. <b>NOTE:</b> that the wrapper label here is just used for tidiness the styling and position of the select and input maybe be different in implementation.</p>
+      <p class="docs">An input with auto-complete. <b>NOTE:</b> The data is being served is a static mockup.</p>
 
       <label class="autocomplete">
         <input type="text" data-autocomplete-dom="#categories" aria-controls="list" aria-haspopup="true">
@@ -41,10 +61,25 @@
         </select>
       </div>
 
-      <h3 class="docs">Dependencies</h3>
+      <h2 class="docs">JSON response</h3>
+      <p class="docs">The response from the server should be an array of strings matching the value of the input</p>
+      <pre><code>
+[
+  "foo",
+  "bar"
+]
+        </code></pre>
+
+      <h2 class="docs">Events</h3>
+
+      <h2 class="docs">Dependencies</h3>
       <ul class="docs">
-        <li>None</li>
+        <li>Menu (<a alt="repository" href="https://github.com/filamentgroup/menu">repository</a>)</li>
       </ul>
     </div>
+
+    <script>
+      $( function(){ $(document).trigger( "enhance" ); });
+    </script>
 </body>
 </html>

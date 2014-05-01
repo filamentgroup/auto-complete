@@ -3,6 +3,8 @@
 
   var name = "autocomplete";
 
+  w.componentNamespace = w.componentNamespace || {};
+
   var AutoComplete = w.componentNamespace.AutoComplete = function( element, menu, url ){
     // assign element for method events
     this.$element = this.$input = $( element );
@@ -83,10 +85,7 @@
       dataType: "json",
       url: this.url,
       data: {
-        q: this.val().toLowerCase(),
-
-        // TODO this should probably be an option somewhere
-        ver: "1.16.21"
+        q: this.val().toLowerCase()
       }
     });
   };
@@ -98,11 +97,7 @@
     var data = data.location || data;
 
     if( data.length ) {
-      this.menu.fill($.map( data, function( item ){
-        return (item["localized-name"] && item["localized-name"].value) ||
-          item.term || item;
-      }));
-
+      this.menu.fill(data);
       this.showSuggest();
     }
 

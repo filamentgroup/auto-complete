@@ -1,0 +1,7 @@
+/* menu component */
+[data-menu] {
+	position: absolute;
+}
+[data-menu][aria-hidden=true] {
+	display: none;
+}
