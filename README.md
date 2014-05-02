@@ -48,7 +48,7 @@ Clear from the implementation of the component. ∎
 
 **Lemma 2.** *All languages in AUTO can be reduced in polynomial time to the language decided by auto-complete.*
 
-Follows directly from the observation that the component takes as one of its parameters the "URL" for the oracle which it will consult. As a result we can always simulate another language in AUTO by taking both the input and the URL for the oracle used in the implementation of the corresponding Turing machine which ensures that it will always have "the right oracle" to answer queries in a single round for any language in AUTO. ∎
+Follows directly from the observation that the component takes as one of its parameters the "URL" for the oracle which it will consult. As a result we can always simulate the Turing machine for another language in AUTO by taking both the input and the URL for the oracle used in the implementation of the corresponding Turing machine which ensures that it will always have "the right oracle" to answer queries in a single round for any language in AUTO. ∎
 
 **Theorem.** *The language decided by the auto-complete component is AUTO-complete*
 
