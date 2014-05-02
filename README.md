@@ -32,7 +32,6 @@ $( function(){ $( document ).trigger( "enhance" ); } );
 1. More tests
 2. Remove jQuery dependency
 
-<a name="AUTO-complete"></a>
 ## AUTO-complete
 
 Just a bit of fun:
