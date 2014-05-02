@@ -27,6 +27,10 @@ Typically the enhancement is triggered on DOM ready and when subsequent markup i
 $( function(){ $( document ).trigger( "enhance" ); } );
 ```
 
+## Examples:
+
+See the [demo page](http://filamentgroup.github.io/auto-complete/) for examples.
+
 ## TODO
 
 1. More tests
