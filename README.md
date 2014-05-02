@@ -42,6 +42,14 @@ Just a bit of fun:
 
 We define a class of languages AUTO, such that L is in AUTO if there exists a Turing machine M and an oracle O where M can write its input on the oracle tape and respond directly with the oracle's answer in a single query.
 
+**Lemma 1.** *The language decided by the auto-complete component is in AUTO.*
+
+Clear from the implementation of the component. ∎
+
+**Lemma 2.** *All languages in AUTO can be reduced in polynomial time to the language decided by auto-complete.*
+
+Follows directly from the observation that the component takes as one of its parameters the "URL" for the oracle which it will consult. As a result we can always simulate another language in AUTO by taking both the input and the URL for the oracle used in the implementation of the corresponding Turing machine which ensures that it will always have "the right oracle" to answer queries in a single round for any language in AUTO. ∎
+
 **Theorem.** *The language decided by the auto-complete component is AUTO-complete*
 
-**Proof.** This follows directly from the observation that the component takes as one of its parameters the "URL" for the oracle which it will consult which ensures that it will always have a sufficiently powerful oracle to answer queries in a single round for any language in AUTO. ∎
+By Lemma's 1 and 2. ∎
