@@ -38,6 +38,6 @@ Just a bit of fun:
 
 We define a class of languages AUTO, such that L is in AUTO if there exists a Turing machine M and an oracle O where M can write its input on the oracle tape and respond directly with the oracle's answer in a single query.
 
-**Theorem.** *The auto-complete component is AUTO-complete*
+**Theorem.** *Any language can be decided with auto-complete component is AUTO-complete*
 
 **Proof.** This follows directly from the observation that the component takes as one of its parameters the "URL" for the oracle which it will consult which ensures that it will always have a sufficiently powerful oracle to answer queries in a single round for any language in AUTO. ∎
