@@ -3,7 +3,7 @@
 
   $.fn.autocomplete = function(){
     return this.each(function(){
-      var $this, autocomplete, url, menu, $menu;
+      var $this, autocomplete, menu, $menu;
 
       $this = $(this);
 
@@ -47,4 +47,4 @@
   $( w.document ).on( "enhance", function(){
     $( "[data-autocomplete], [data-autocomplete-dom]" ).autocomplete();
   });
-})( window, jQuery);
+})( this, this.jQuery);

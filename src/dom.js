@@ -1,8 +1,6 @@
 (function( w, $ ){
   "use strict";
 
-  var name = "autocomplete";
-
   var AutoCompleteDom = function( element, menu ){
     w.componentNamespace.AutoComplete.call( this, element, menu );
     this.$domSource = $( this.$input.attr("data-autocomplete-dom") );
@@ -18,7 +16,7 @@
       var text = $(elem).text();
 
       // simple substring match
-      return text.toLowerCase().indexOf( value ) != -1 ? this.strip(text) : undefined;
+      return text.toLowerCase().indexOf( value ) !== -1 ? this.strip(text) : undefined;
     }, this)));
   };
-})(this, jQuery);
+})(this, this.jQuery);

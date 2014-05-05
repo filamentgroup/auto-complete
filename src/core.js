@@ -18,7 +18,7 @@
 
     // TODO it might be better to push this into the constructor of the menu to
     //      reduce dependency on the structure of the menu's keybinding reresentation
-    $.each(menu.keycodes, $.proxy(function( key, value ){
+    $.each(menu.keycodes, $.proxy(function( key ){
       this.ignoreKeycodes.push( parseInt(key, 10) );
     }, this));
 
@@ -48,12 +48,12 @@
     }
   };
 
-  AutoComplete.prototype.select = function( e ) {
+  AutoComplete.prototype.select = function() {
     this.val( this.strip(this.menu.selectActive() || "") );
   };
 
   AutoComplete.prototype.suggest = function( e ){
-    if( e && e.keyCode && this.ignoreKeycodes.indexOf(e.keyCode) != -1 ){
+    if( e && e.keyCode && this.ignoreKeycodes.indexOf(e.keyCode) !== -1 ){
       return;
     }
 
@@ -94,7 +94,7 @@
   //      set this up so that render can be replaced or at least
   //      the data manip can be parameterized
   AutoComplete.prototype.render = function( data ) {
-    var data = data.location || data;
+    data = data.location || data;
 
     if( data.length ) {
       this.menu.fill(data);
@@ -143,4 +143,4 @@
       this.$form.off( "submit.autocomplete" );
     }, this), AutoComplete.submitPreventTimeout);
   };
-})( this, jQuery );
+})( this, this.jQuery );
