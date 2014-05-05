@@ -24,7 +24,7 @@ Use the following includes to setup the init on enhance:
 Typically the enhancement is triggered on DOM ready and when subsequent markup is added to the page:
 
 ``` js
-$( function(){ $( document ).trigger( "enhance" ); } );
+$( function(){ $(document).trigger("enhance"); } );
 ```
 
 ## Examples:
