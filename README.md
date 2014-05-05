@@ -33,8 +33,7 @@ See the [demo page](http://filamentgroup.github.io/auto-complete/) for examples.
 
 ## TODO
 
-1. More tests
-2. Remove jQuery dependency
+1. Remove jQuery dependency
 
 ## AUTO-complete
 
