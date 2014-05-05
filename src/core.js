@@ -43,7 +43,7 @@
       value = this.menu.keyDown(event);
 
       if( value ){
-        this.strip( this.val(value) );
+        this.val( this.strip(value) );
       }
     }
   };
