@@ -2,6 +2,8 @@
 
 A bare-bones auto-complete component which currently depends on jQuery.
 
+![Build status](https://api.travis-ci.org/filamentgroup/auto-complete.svg)
+
 ## Dependencies
 
 1. jQuery (see TODO)
