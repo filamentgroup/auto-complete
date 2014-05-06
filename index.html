@@ -11,19 +11,22 @@
     <link rel="stylesheet" href="lib/menu.css">
   </head>
   <body class="docs">
+    <div class="header">
+      <a href="http://filamentgroup.com/"><h1 id="fg-logo">Filament Group</h1></a>
+    </div>
     <div class="autocomplete-docs">
       <h1 class="docs">Demos</h2>
       <p class="docs-intro">An input with auto-complete. <b>NOTE:</b> The data being served is a static mockup from <code>$PROJECT_DIR/demo.json</code>.</p>
 
     <pre class="language-html">
-&lt;<span class="function-name">input</span> <span class="variable-name">type</span>=<span class="string">"text"</span> <span class="variable-name">data-autocomplete</span>=<span class="string">"demo.json"</span> <span class="variable-name">aria-controls</span>=<span class="string">"list"</span> <span class="variable-name">aria-haspopup</span>=<span class="string">"true"</span>&gt;
+&lt;<span class="function-name">input</span> <span class="variable-name">data-autocomplete</span>=<span class="string">"./demo.json"</span> <span class="variable-name">aria-controls</span>=<span class="string">"list"</span> <span class="variable-name">aria-haspopup</span>=<span class="string">"true"</span>&gt;
 &lt;<span class="function-name">div</span> <span class="variable-name">class</span>=<span class="string">"suggest menu"</span> data-menu&gt;
   &lt;<span class="function-name">ol</span>&gt;
   &lt;/<span class="function-name">ol</span>&gt;
 &lt;/<span class="function-name">div</span>&gt;
 </pre>
 
-      <input type="text" data-autocomplete="demo.json" aria-controls="list" aria-haspopup="true">
+      <input data-autocomplete="demo.json" aria-controls="list" aria-haspopup="true">
       <div class="suggest menu" data-menu>
         <ol>
         </ol>
@@ -35,7 +38,7 @@
 
     <pre class="language-html">
 &lt;<span class="function-name">label</span> <span class="variable-name">class</span>=<span class="string">"autocomplete"</span>&gt;
-  &lt;<span class="function-name">input</span> <span class="variable-name">type</span>=<span class="string">"text"</span> <span class="variable-name">data-autocomplete-dom</span>=<span class="string">"#categories"</span> <span class="variable-name">aria-controls</span>=<span class="string">"list"</span> <span class="variable-name">aria-haspopup</span>=<span class="string">"true"</span>&gt;
+  &lt;<span class="function-name">input</span> <span class="variable-name">data-autocomplete-dom</span>=<span class="string">"#categories"</span> <span class="variable-name">aria-controls</span>=<span class="string">"list"</span> <span class="variable-name">aria-haspopup</span>=<span class="string">"true"</span>&gt;
   &lt;<span class="function-name">div</span> <span class="variable-name">class</span>=<span class="string">"suggest menu"</span> data-menu&gt;
     &lt;<span class="function-name">ol</span>&gt;
     &lt;/<span class="function-name">ol</span>&gt;
@@ -51,7 +54,7 @@
 </pre>
 
       <label class="autocomplete">
-        <input type="text" data-autocomplete-dom="#categories" aria-controls="list" aria-haspopup="true">
+        <input data-autocomplete-dom="#categories" aria-controls="list" aria-haspopup="true">
         <div class="suggest menu" data-menu>
           <ol>
           </ol>
@@ -75,10 +78,7 @@
   "foo",
   "bar"
 ]
-        </code></pre>
-
-      <h2 class="docs">Events</h3>
-
+      </code></pre>
       <h2 class="docs">Dependencies</h3>
       <ul class="docs">
         <li>Menu (<a alt="repository" href="https://github.com/filamentgroup/menu">repository</a>)</li>
