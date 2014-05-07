@@ -1,6 +1,6 @@
 # Auto-complete
 
-A bare-bones auto-complete component which currently depends on jQuery.
+A lightweight auto-complete that can be populated via JSON or by DOM element text.
 
 ![Build status](https://api.travis-ci.org/filamentgroup/auto-complete.svg)
 
