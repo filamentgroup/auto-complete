@@ -1,5 +1,7 @@
 # Auto-complete
 
+[![Filament Group](http://filamentgroup.com/images/fg-logo-positive-sm-crop.png) ](http://www.filamentgroup.com/)
+
 A lightweight auto-complete that can be populated via JSON or by DOM element text.
 
 ![Build status](https://api.travis-ci.org/filamentgroup/auto-complete.svg)
