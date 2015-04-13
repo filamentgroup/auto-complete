@@ -8,15 +8,6 @@
 
     $instance.autocomplete();
     instance = $instance.data( "autocomplete-component" );
-    promise = $.Deferred();
-
-    instance.fetch = function() {
-      return promise;
-    };
-
-    promise.abort = function() {
-      this.reject();
-    };
   };
 
   commonTeardown = function() {
@@ -35,11 +26,9 @@
 
     $instance.val( "" );
 
-    promise.fail(function() {
+    $instance.one("autocomplete:aborted", function() {
       ok( true, "called" );
     });
-
-    instance._suggestPromise = promise;
 
     $instance.one( "autocomplete:hidden", function(){
       ok( true, "called" );
@@ -52,28 +41,15 @@
   asyncTest( "aborts previous fetches", function() {
     expect( 1 );
 
-    $instance.val( "foo" );
-
-    promise.fail(function() {
+    $instance.one("autocomplete:aborted", function() {
       ok( true, "called" );
-      start();
+      start()
     });
 
-    instance._suggestPromise = promise;
+    $instance.val( "foo" );
     instance.suggest();
-  });
-
-  asyncTest( "shows output on fetch completion", function() {
-    expect( 1 );
-
-    $instance.val( "foo" );
-
-    promise.done(function() {
-      ok( true, "called" );
-      start();
-    });
-
-    instance.suggest().resolve( [] );
+    $instance.val( "fooz" );
+    instance.suggest();
   });
 
   test( "value is assigned, stripped from menu keydown", function() {

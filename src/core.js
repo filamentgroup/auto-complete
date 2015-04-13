@@ -90,6 +90,8 @@
   AutoComplete.prototype.abortFetch = function() {
     // invalidate the current request value by incrementing the counter
     this._requestId += 1;
+
+    this.$input.trigger( name + ":aborted" );
   };
 
   AutoComplete.prototype.fetch = function( success ) {
