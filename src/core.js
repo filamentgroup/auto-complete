@@ -83,7 +83,7 @@
         return;
       }
 
-      this.render(JSON.parse(data));
+      this.render(typeof data == "string" ? JSON.parse(data): data);
     }, this));
   };
 
@@ -93,7 +93,7 @@
   };
 
   AutoComplete.prototype.fetch = function( success ) {
-    return $.ajax(this.url, {
+    $.ajax(this.url, {
       dataType: "json",
 
       data: {

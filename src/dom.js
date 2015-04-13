@@ -9,14 +9,18 @@
   w.componentNamespace.AutoCompleteDom = AutoCompleteDom;
   $.extend(AutoCompleteDom.prototype, w.componentNamespace.AutoComplete.prototype);
 
-  AutoCompleteDom.prototype.fetch = function(){
-    var deferred = $.Deferred(), value = this.$input.val().toLowerCase();
+  AutoCompleteDom.prototype.fetch = function( callback ){
+    var value = this.$input.val().toLowerCase(), keep = [];
 
-    return deferred.resolve(this.$domSource.children().map($.proxy(function( i, elem ){
+    this.$domSource.children().each($.proxy(function( i, elem ){
       var text = $(elem).text();
 
       // simple substring match
-      return text.toLowerCase().indexOf( value ) !== -1 ? this.strip(text) : undefined;
-    }, this)));
+      if( text.toLowerCase().indexOf( value ) !== -1 ){
+        keep.push(this.strip(text));
+      }
+    }, this));
+
+    callback( keep );
   };
 })(this, this.jQuery);
