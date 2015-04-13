@@ -34,6 +34,8 @@
     this.$input.attr( "autocomplete", "off" );
 
     this.$form = this.$input.parents( "form" );
+
+    this._requestId = 0;
   };
 
   AutoComplete.preventSubmitTimeout = 200;
@@ -73,26 +75,32 @@
 
     this.abortFetch();
 
-    this._suggestPromise = this.fetch();
+    var request = this._requestId += 1;
 
-    return this._suggestPromise.done($.proxy( this, "render" ));
+    this.fetch($.proxy(function( data ) {
+      // we have made another request, ignore this one
+      if( request != this._requestId ) {
+        return;
+      }
+
+      this.render(JSON.parse(data));
+    }, this));
   };
 
   AutoComplete.prototype.abortFetch = function() {
-    // if suggest is called many times we want to use the last
-    // NOTE ajax doesn't return a normal deferred so I couldn't find a way to reject
-    if( this._suggestPromise && this._suggestPromise.abort ) {
-      this._suggestPromise.abort();
-    }
+    // invalidate the current request value by incrementing the counter
+    this._requestId += 1;
   };
 
-  AutoComplete.prototype.fetch = function() {
-    return $.ajax({
+  AutoComplete.prototype.fetch = function( success ) {
+    return $.ajax(this.url, {
       dataType: "json",
-      url: this.url,
+
       data: {
         q: this.val().toLowerCase()
-      }
+      },
+
+      success: success
     });
   };
 
@@ -124,7 +132,7 @@
 
   // TODO remove
   AutoComplete.prototype.strip = function( string ) {
-    return $.trim( string );
+    return string.replace(/^\s+|\s+$/g, '');
   };
 
   AutoComplete.prototype.val = function( str ) {

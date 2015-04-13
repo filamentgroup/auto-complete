@@ -11,7 +11,7 @@
         return;
       }
 
-      $menu = $this.siblings("[data-menu]").eq( 0 );
+      $menu = $this.parent().find( "[data-menu]" ).eq( 0 );
 
       menu = $menu.data( 'Menu' );
 
