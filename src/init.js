@@ -33,12 +33,10 @@
         });
       }
 
-      $this.on({
-        keyup: $.proxy( autocomplete, "suggest" ),
-        keydown: $.proxy( autocomplete, "navigate" )
-      });
+      $this.on( "keyup", $.proxy(autocomplete.suggest, autocomplete) );
+      $this.on( "keydown", $.proxy(autocomplete.navigate, autocomplete) );
 
-      menu.$element.on( "mouseup", $.proxy( autocomplete, "select" ));
+      menu.$element.on( "mouseup", $.proxy(autocomplete.select, autocomplete) );
 
       menu.init();
     });

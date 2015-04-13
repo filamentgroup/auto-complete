@@ -5,6 +5,12 @@
 
   w.componentNamespace = w.componentNamespace || {};
 
+  $.proxy = $.proxy || function(fn, context) {
+    return function() {
+      return fn.apply(context, arguments);
+    };
+  };
+
   var AutoComplete = w.componentNamespace.AutoComplete = function( element, menu ){
     // assign element for method events
     this.$element = this.$input = $( element );
@@ -73,7 +79,7 @@
   };
 
   AutoComplete.prototype.abortFetch = function() {
-    // if suggest is called many times we want to use that last
+    // if suggest is called many times we want to use the last
     // NOTE ajax doesn't return a normal deferred so I couldn't find a way to reject
     if( this._suggestPromise && this._suggestPromise.abort ) {
       this._suggestPromise.abort();
