@@ -79,11 +79,11 @@
 
     this.fetch($.proxy(function( data ) {
       // we have made another request, ignore this one
-      if( request != this._requestId ) {
+      if( request !== this._requestId ) {
         return;
       }
 
-      this.render(typeof data == "string" ? JSON.parse(data): data);
+      this.render(typeof data === "string" ? JSON.parse(data): data);
     }, this));
   };
 
