@@ -8,7 +8,7 @@ A lightweight auto-complete that can be populated via JSON or by DOM element tex
 
 ## Dependencies
 
-1. jQuery (see TODO)
+1. jQuery or Shoestring
 2. [Menu](https://github.com/filamentgroup/menu)
 
 ## Setup
@@ -35,9 +35,6 @@ $( function(){ $(document).trigger("enhance"); } );
 
 See the [demo page](http://filamentgroup.github.io/auto-complete/) for examples.
 
-## TODO
-
-1. Remove jQuery dependency
 
 ## AUTO-complete
 
