@@ -16,7 +16,7 @@ A lightweight auto-complete that can be populated via JSON or by DOM element tex
 Use the following includes to setup the init on enhance:
 
 ```html
-<script src="lib/jquery.js"></script>
+<script src="lib/shoestring-dev.js"></script>
 <script src="lib/menu.js"></script>
 <script src="src/core.js"></script>
 <!-- optional if you're not using a DOM source for data -->
