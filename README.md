@@ -40,7 +40,7 @@ See the [demo page](http://filamentgroup.github.io/auto-complete/) for examples.
 
 Just a bit of fun:
 
-We define a class of languages AUTO, such that L is in AUTO if there exists a Turing machine M and an oracle O where M can write its input on the oracle tape and respond directly with the oracle's answer in a single query.
+We define a class of languages AUTO, such that L is in AUTO if there exists a Turing machine M and an oracle O where M can write its input on the oracle tape and respond directly with the oracle's answer in a single query and L is decided by M.
 
 **Lemma 1.** *The language decided by the auto-complete component is in AUTO.*
 
