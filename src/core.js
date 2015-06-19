@@ -32,6 +32,8 @@
 
     this.$input.data( "autocomplete-component", this );
     this.$input.attr( "autocomplete", "off" );
+    this.isFiltered = !this.$input.is( "[data-unfiltered]" );
+    this.isCaseSensitive = this.$input.is( "[data-case-sensitive]" );
 
     this.$form = this.$input.parents( "form" );
 
@@ -58,6 +60,25 @@
 
   AutoComplete.prototype.select = function() {
     this.val( this.strip(this.menu.selectActive() || "") );
+  };
+
+  AutoComplete.prototype.filterData = function(data){
+    if( !data.length ) {
+      return;
+    }
+    var val = this.val();
+    var compare;
+    if( !this.isCaseSensitive ) {
+      val = val.toLowerCase();
+    }
+    var filtered = [];
+    for( var j = 0, k = data.length; j < k; j++ ) {
+      compare = !this.isCaseSensitive ? data[ j ].toLowerCase() : data[ j ];
+      if( compare.indexOf( val ) > -1 ) {
+        filtered.push( data[ j ] );
+      }
+    }
+    return filtered;
   };
 
   AutoComplete.prototype.suggest = function( e ){
@@ -113,7 +134,7 @@
     data = data.location || data;
 
     if( data.length ) {
-      this.menu.fill(data);
+      this.menu.fill(this.filterData(data));
       this.showSuggest();
     }
 

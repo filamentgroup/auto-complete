@@ -98,6 +98,23 @@
     equal( $menuItems.eq( 1 ).text(), "bar" );
   });
 
+  test( "filters non-matches by default", function() {
+    instance.$element.val( "foo" );
+    instance.render( [ "foo", "bar" ] );
+
+    var $menuItems = instance.menu.$element.find("li");
+    equal( $menuItems.length, 1 );
+    equal( $menuItems.eq( 0 ).text(), "foo" );
+  });
+
+  test( "case insensitive by default", function() {
+    instance.$element.val( "Foo" );
+    instance.render( [ "foo", "bar" ] );
+
+    var $menuItems = instance.menu.$element.find("li");
+    equal( $menuItems.eq( 0 ).text(), "foo" );
+  });
+
   asyncTest( "triggers the suggested event", function() {
     expect( 1 );
 
@@ -160,16 +177,16 @@
   test( "returns value with no formal param", function() {
     instance.$element.val( "baz" );
 
-	  equal( instance.val(), "baz" );
+    equal( instance.val(), "baz" );
   });
 
   test( "sets value with formal param", function() {
     instance.$element.val( "bak" );
 
-	  equal( instance.val(), "bak" );
+    equal( instance.val(), "bak" );
 
     instance.val( "bag" );
 
-	  equal( instance.val(), "bag" );
+    equal( instance.val(), "bag" );
   });
 })( jQuery, this );
