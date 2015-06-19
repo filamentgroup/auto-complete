@@ -25,24 +25,11 @@
         },
         core: {
           src: ['src/core.js', 'src/init.js'],
-          dest: 'dist/core.js'
+          dest: 'dist/autocomplete-core.js'
         },
         all: {
           src: ['src/core.js', 'src/dom.js', 'src/init.js'],
-          dest: 'dist/all.js'
-        }
-      },
-      uglify: {
-        options: {
-          banner: '<%= banner %>'
-        },
-        core: {
-          src: ['<%= concat.core.src %>'],
-          dest: 'dist/core.min.js'
-        },
-        dom: {
-          src: ['<%= concat.all.src %>'],
-          dest: 'dist/all.min.js'
+          dest: 'dist/autocomplete.js'
         }
       },
       qunit: {
@@ -68,17 +55,9 @@
         }
       },
       watch: {
-        gruntfile: {
-          files: '<%= jshint.gruntfile.src %>',
-          tasks: ['jshint:gruntfile']
-        },
         src: {
-          files: '<%= jshint.src.src %>',
-          tasks: ['jshint:src', 'qunit']
-        },
-        test: {
-          files: '<%= jshint.test.src %>',
-          tasks: ['jshint:test', 'qunit']
+          files: '<%= jshint.all.src %>',
+          tasks: ['jshint:all', 'qunit']
         }
       }
     });
@@ -92,7 +71,7 @@
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task.
-    grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat']);
     grunt.registerTask('test', ['jshint', 'qunit']);
   };
 })();
