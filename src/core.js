@@ -74,7 +74,7 @@
     var filtered = [];
     for( var j = 0, k = data.length; j < k; j++ ) {
       compare = !this.isCaseSensitive ? data[ j ].toLowerCase() : data[ j ];
-      if( compare.indexOf( val ) > -1 ) {
+      if( compare.indexOf( val ) === 0 ) {
         filtered.push( data[ j ] );
       }
     }
