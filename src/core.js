@@ -132,9 +132,8 @@
   //      the data manip can be parameterized
   AutoComplete.prototype.render = function( data ) {
     data = data.location || data;
-
     if( data.length ) {
-      this.menu.fill(this.filterData(data));
+      this.menu.fill(this.filterData(data), this.menu.getSelectedElement().text());
       this.showSuggest();
     }
 
