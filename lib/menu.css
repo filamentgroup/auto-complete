@@ -5,3 +5,7 @@
 [data-menu][aria-hidden=true] {
 	display: none;
 }
+[data-menu] ol:empty:before {
+	content: "No results.";
+	font-style: italic;
+}
