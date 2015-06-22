@@ -24,9 +24,9 @@
 
     // TODO it might be better to push this into the constructor of the menu to
     //      reduce dependency on the structure of the menu's keybinding reresentation
-    $.each(menu.keycodes, $.proxy(function( key ){
-      this.ignoreKeycodes.push( parseInt(key, 10) );
-    }, this));
+    for( var key in menu.keycodes ) {
+      this.ignoreKeycodes.push( parseInt( key, 10 ) );
+    }
 
     this.url = this.$element.attr( "data-autocomplete" );
 
