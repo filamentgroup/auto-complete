@@ -232,6 +232,42 @@
     $bestMatch.trigger( "keyup" );
   });
 
+  asyncTest( "empty-no-match empties the field when no match", function() {
+    expect(1);
+
+    var $noMatch = $( "[data-empty-no-match]" );
+
+    $noMatch.val( "bzzz" );
+
+    $noMatch.one("autocomplete:suggested", function() {
+      $noMatch.trigger( "blur" );
+
+      equal( $noMatch.val(), "", "value matches" );
+      start();
+    });
+
+    $noMatch.trigger( "keyup" );
+  });
+
+  asyncTest( "not empty-no-match leaves value in field without match", function() {
+    expect(1);
+
+    var $noMatch = $( "[data-empty-no-match]" );
+
+    $noMatch.val( "bzzz" );
+
+    $noMatch.data( "autocomplete-component" ).isEmptyNoMatch = false;
+
+    $noMatch.one("autocomplete:suggested", function() {
+      $noMatch.trigger( "blur" );
+
+      equal( $noMatch.val(), "bzzz", "value matches" );
+      start();
+    });
+
+    $noMatch.trigger( "keyup" );
+  });
+
   // Issue #6
   asyncTest( "mismatch hides menu", function() {
     expect(2);

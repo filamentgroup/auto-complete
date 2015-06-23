@@ -51,8 +51,14 @@
   AutoComplete.preventSubmitTimeout = 200;
 
   AutoComplete.prototype.blur = function() {
-    if( this.isBestMatch ){
+    // use the best match when there is one
+    if( this.isBestMatch && this.matches[0] ){
       this.$input.val( this.matches[0] );
+    }
+
+    // empty the field when there are no matches
+    if( this.isEmptyNoMatch && !this.matches[0] ){
+      this.$input.val("");
     }
   };
 
