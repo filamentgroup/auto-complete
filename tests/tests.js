@@ -213,6 +213,25 @@
     $bestMatch.trigger( "keyup" );
   });
 
+  asyncTest( "not bestmatch leaves value on blur", function() {
+    expect(1);
+
+    var $bestMatch = $( "[data-best-match]" );
+
+    $bestMatch.val( "ba" );
+
+    $bestMatch.data( "autocomplete-component" ).isBestMatch = false;
+
+    $bestMatch.one("autocomplete:suggested", function() {
+      $bestMatch.trigger( "blur" );
+
+      equal( $bestMatch.val(), "ba", "value matches" );
+      start();
+    });
+
+    $bestMatch.trigger( "keyup" );
+  });
+
   // Issue #6
   asyncTest( "mismatch hides menu", function() {
     expect(2);
