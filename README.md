@@ -31,6 +31,10 @@ Typically the enhancement is triggered on DOM ready and when subsequent markup i
 $( function(){ $(document).trigger("enhance"); } );
 ```
 
+## Options
+
+* `data-best-match`, if the input has this attribute, on blur, the first match in the current suggested matches will be used to populate the input.
+
 ## Examples:
 
 See the [demo page](http://filamentgroup.github.io/auto-complete/) for examples.
