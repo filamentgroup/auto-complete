@@ -135,6 +135,8 @@
     if( data.length ) {
       this.menu.fill(this.filterData(data), this.menu.getSelectedElement().text());
       this.showSuggest();
+    } else {
+      this.hideSuggest();
     }
 
     this.$input.trigger( name + ":suggested" );
