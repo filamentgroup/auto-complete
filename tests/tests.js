@@ -12,9 +12,11 @@
   };
 
   commonTeardown = function() {
-    $instance.unbind( "autocomplete:suggested" )
+    $instances
+      .unbind( "autocomplete:suggested" )
       .unbind( "autocomplete:shown" )
-      .unbind( "autocomplete:hidden" );
+      .unbind( "autocomplete:hidden" )
+      .unbind( "autocomplete:aborted" );
   };
 
   module( "auto-complete", config = {
@@ -44,7 +46,7 @@
 
     $instance.one("autocomplete:aborted", function() {
       ok( true, "called" );
-      start()
+      start();
     });
 
     $instance.val( "foo" );
@@ -119,7 +121,7 @@
   asyncTest( "triggers the suggested event", function() {
     expect( 1 );
 
-    $doc.on( "autocomplete:suggested", function() {
+    $doc.one( "autocomplete:suggested", function() {
       ok( true );
       start();
     });
@@ -142,7 +144,7 @@
   asyncTest( "triggers shown event", function() {
     expect( 1 );
 
-    $doc.on( "autocomplete:shown", function() {
+    $doc.one( "autocomplete:shown", function() {
       ok( true );
       start();
     });
@@ -165,7 +167,7 @@
   asyncTest( "triggers hidden event", function() {
     expect( 1 );
 
-    $doc.on( "autocomplete:hidden", function() {
+    $doc.one( "autocomplete:hidden", function() {
       ok( true );
       start();
     });
@@ -191,21 +193,48 @@
     equal( instance.val(), "bag" );
   });
 
+  module( "misc", config );
+
+  // Issue #5
   asyncTest( "bestmatch selects first match on blur", function() {
+    expect(1);
+
     var $bestMatch = $( "[data-best-match]" );
 
     $bestMatch.val( "ba" );
 
-    equal( $bestMatch.val(), "ba" );
-
-    $bestMatch.on("autocomplete:suggested", function() {
+    $bestMatch.one("autocomplete:suggested", function() {
       $bestMatch.trigger( "blur" );
 
-      equal( $bestMatch.val(), "Bar" );
+      equal( $bestMatch.val(), "Bar", "value matches" );
       start();
     });
 
     $bestMatch.trigger( "keyup" );
+  });
+
+  // Issue #6
+  asyncTest( "mismatch hides menu", function() {
+    expect(2);
+
+    var $instance = $instances.eq( 1 );
+    instance = $instance.data( "autocomplete-component" );
+
+    $instance.one("autocomplete:suggested", function() {
+      ok(instance.menu.opened, "menu opened");
+
+      $instance.one("autocomplete:suggested", function() {
+        ok(!instance.menu.opened, "menu closed");
+      });
+
+      $instance.val( "bz" );
+      $instance.trigger( "keyup" );
+
+      start();
+    });
+
+    $instance.val( "b" );
+    $instance.trigger( "keyup" );
   });
 
 })( jQuery, this );
