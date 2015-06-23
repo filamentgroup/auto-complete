@@ -35,9 +35,8 @@
 
       $this.on( "keyup", $.proxy(autocomplete.suggest, autocomplete) );
       $this.on( "keydown", $.proxy(autocomplete.navigate, autocomplete) );
-
+      $this.on( "blur", $.proxy(autocomplete.blur, autocomplete) );
       menu.$element.on( "mouseup", $.proxy(autocomplete.select, autocomplete) );
-
       menu.init();
     });
   };

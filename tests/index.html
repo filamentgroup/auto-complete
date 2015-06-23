@@ -8,16 +8,33 @@
     <script src="../lib/shoestring-dev.js"></script>
     <script src="../lib/menu.js"></script>
     <script src="../src/core.js"></script>
+    <script src="../src/dom.js"></script>
     <script src="../src/init.js"></script>
   </head>
   <body>
     <div id="qunit"></div>
     <div id="qunit-fixture">
-      <input type="text" data-suggest-url="" data-autocomplete>
+      <input type="text" data-suggest-url="" data-autocomplete id="foo"/>
       <div class="suggest" data-menu>
         <ol>
         </ol>
       </div>
+
+      <input data-autocomplete-dom="#categories"
+             data-best-match
+             aria-controls="list"
+             aria-haspopup="true" />
+      <div class="suggest menu" data-menu>
+        <ol>
+        </ol>
+      </div>
+
+      <select id="categories">
+        <option>Foo</option>
+        <option>Bar</option>
+        <option>Baz</option>
+        <option>Bak</option>
+      </select>
     </div>
 
     <script src="tests.js"></script>

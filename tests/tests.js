@@ -1,12 +1,13 @@
 (function( $, window ) {
-  var $doc, $instance, instance, promise, commonSetup, commonTeardown, config;
+  var $doc, $instances, $instance, instance, promise, commonSetup, commonTeardown, config;
 
   $doc = $( document );
 
   commonSetup = function() {
-    $instance = $( "[data-autocomplete]" );
+    $instances = $( "[data-autocomplete], [data-autocomplete-dom]" );
 
-    $instance.autocomplete();
+    $instances.autocomplete();
+    $instance = $instances.eq( 0 );
     instance = $instance.data( "autocomplete-component" );
   };
 
@@ -189,4 +190,22 @@
 
     equal( instance.val(), "bag" );
   });
+
+  asyncTest( "bestmatch selects first match on blur", function() {
+    var $bestMatch = $( "[data-best-match]" );
+
+    $bestMatch.val( "ba" );
+
+    equal( $bestMatch.val(), "ba" );
+
+    $bestMatch.on("autocomplete:suggested", function() {
+      $bestMatch.trigger( "blur" );
+
+      equal( $bestMatch.val(), "Bar" );
+      start();
+    });
+
+    $bestMatch.trigger( "keyup" );
+  });
+
 })( jQuery, this );

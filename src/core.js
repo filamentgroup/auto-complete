@@ -11,7 +11,7 @@
     };
   };
 
-  var AutoComplete = w.componentNamespace.AutoComplete = function( element, menu ){
+  var AutoComplete = function( element, menu ){
     // assign element for method events
     this.$element = this.$input = $( element );
 
@@ -32,15 +32,29 @@
 
     this.$input.data( "autocomplete-component", this );
     this.$input.attr( "autocomplete", "off" );
+
+    // TODO move to options object
     this.isFiltered = !this.$input.is( "[data-unfiltered]" );
     this.isCaseSensitive = this.$input.is( "[data-case-sensitive]" );
+    this.isBestMatch = this.$input.is( "[data-best-match]" );
+    this.isEmptyNoMatch = this.$input.is( "[data-empty-no-match]" );
 
     this.$form = this.$input.parents( "form" );
 
     this._requestId = 0;
+
+    this.matches = []
   };
 
+  w.componentNamespace.AutoComplete = AutoComplete;
+
   AutoComplete.preventSubmitTimeout = 200;
+
+  AutoComplete.prototype.blur = function( event ) {
+    if( this.isBestMatch ){
+      this.$input.val( this.matches[0] );
+    }
+  };
 
   // TODO tightly coupled to the notion of keypresses
   AutoComplete.prototype.navigate = function( event ){
@@ -127,11 +141,14 @@
     });
   };
 
-  // TODO this whole method is KJ specific due to returned json
+  // TODO this whole method is project specific due to returned json
   //      set this up so that render can be replaced or at least
   //      the data manip can be parameterized
   AutoComplete.prototype.render = function( data ) {
     data = data.location || data;
+
+    this.matches = data;
+
     if( data.length ) {
       this.menu.fill(this.filterData(data), this.menu.getSelectedElement().text());
       this.showSuggest();
