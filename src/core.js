@@ -43,14 +43,14 @@
 
     this._requestId = 0;
 
-    this.matches = []
+    this.matches = [];
   };
 
   w.componentNamespace.AutoComplete = AutoComplete;
 
   AutoComplete.preventSubmitTimeout = 200;
 
-  AutoComplete.prototype.blur = function( event ) {
+  AutoComplete.prototype.blur = function() {
     if( this.isBestMatch ){
       this.$input.val( this.matches[0] );
     }
