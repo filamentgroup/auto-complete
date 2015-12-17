@@ -1,14 +1,20 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="node_modules/fg-menu/src/menu.css">
+    <style>
+    [data-menu] ol:empty:before {
+      content: "No results.";
+      font-style: italic;
+    }
+    </style>
     <script src="lib/shoestring-dev.js"></script>
-    <script src="lib/menu.js"></script>
+    <script src="node_modules/fg-menu/src/menu.js"></script>
     <script src="src/core.js"></script>
     <!-- optional if you're not using a DOM source for data -->
     <script src="src/dom.js"></script>
     <script src="src/init.js"></script>
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="lib/menu.css">
   </head>
   <body class="docs">
     <div class="header">
