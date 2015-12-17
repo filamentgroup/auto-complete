@@ -1,6 +1,7 @@
 {
   "name": "fg-auto-complete",
   "title": "auto-complete",
+  "description": "A very small auto-complete component.",
   "homepage": "https://github.com/filamentgroup/auto-complete",
   "version": "0.2.1",
   "repository": {
