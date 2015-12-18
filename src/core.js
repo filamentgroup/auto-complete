@@ -82,22 +82,28 @@
     this.val( this.strip(this.menu.selectActive() || "") );
   };
 
+  AutoComplete.prototype.compareDataItem = function(item, val){
+    var compare = !this.isCaseSensitive ? item.toLowerCase() : item;
+
+    return compare.indexOf( val ) === 0;
+  };
+
   AutoComplete.prototype.filterData = function(data){
     if( !data.length ) {
       return;
     }
     var val = this.val();
-    var compare;
     if( !this.isCaseSensitive ) {
       val = val.toLowerCase();
     }
+
     var filtered = [];
     for( var j = 0, k = data.length; j < k; j++ ) {
-      compare = !this.isCaseSensitive ? data[ j ].toLowerCase() : data[ j ];
-      if( compare.indexOf( val ) === 0 ) {
+      if( this.compareDataItem( data[ j ], val ) ) {
         filtered.push( data[ j ] );
       }
     }
+
     return filtered;
   };
 
@@ -147,6 +153,10 @@
     });
   };
 
+  AutoComplete.prototype.fill = function( data ) {
+    this.menu.fill( this.filterData(data), this.menu.getSelectedElement().text() );
+  };
+
   // TODO this whole method is project specific due to returned json
   //      set this up so that render can be replaced or at least
   //      the data manip can be parameterized
@@ -156,7 +166,7 @@
     this.matches = data;
 
     if( data.length ) {
-      this.menu.fill(this.filterData(data), this.menu.getSelectedElement().text());
+      this.fill( data );
       this.showSuggest();
     } else {
       this.hideSuggest();

@@ -11,9 +11,14 @@
     </style>
     <script src="lib/shoestring-dev.js"></script>
     <script src="node_modules/fg-menu/src/menu.js"></script>
+
     <script src="src/core.js"></script>
+
     <!-- optional if you're not using a DOM source for data -->
     <script src="src/dom.js"></script>
+    <!-- optional if you're not using an HTML AJAX source for data -->
+    <script src="src/ajax-html.js"></script>
+
     <script src="src/init.js"></script>
   </head>
   <body class="docs">
@@ -53,10 +58,10 @@
 &lt;/<span class="function-name">label</span>&gt;
 
 &lt;<span class="function-name">select</span> <span class="variable-name">id</span>=<span class="string">"categories"</span>&gt;
-  &lt;<span class="function-name">option</span>&gt;Foo&lt;/<span class="function-name">option</span>&gt;
-  &lt;<span class="function-name">option</span>&gt;Bar&lt;/<span class="function-name">option</span>&gt;
-  &lt;<span class="function-name">option</span>&gt;Baz&lt;/<span class="function-name">option</span>&gt;
-  &lt;<span class="function-name">option</span>&gt;Bak&lt;/<span class="function-name">option</span>&gt;
+  &lt;<span class="function-name">option value="Foo"</span>&gt;Foo&lt;/<span class="function-name">option</span>&gt;
+  &lt;<span class="function-name">option value="Bar"</span>&gt;Bar&lt;/<span class="function-name">option</span>&gt;
+  &lt;<span class="function-name">option value="Baz"</span>&gt;Baz&lt;/<span class="function-name">option</span>&gt;
+  &lt;<span class="function-name">option value="Bak"</span>&gt;Bak&lt;/<span class="function-name">option</span>&gt;
 &lt;/<span class="function-name">select</span>&gt;
 </pre>
 
@@ -71,10 +76,10 @@
       <div class="btn btn-primary btn-select">
         <span class="ki-icon ki-icon-carat-down"></span>
         <select id="categories">
-          <option>Foo</option>
-          <option>Bar</option>
-          <option>Baz</option>
-          <option>Bak</option>
+          <option value="Foo">Foo</option>
+          <option value="Bar">Bar</option>
+          <option value="Baz">Baz</option>
+          <option value="Bak">Bak</option>
         </select>
       </div>
 

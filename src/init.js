@@ -21,9 +21,12 @@
 
       if( $this.is("[data-autocomplete]") ){
         autocomplete = new w.componentNamespace.AutoComplete( this, menu );
+      } else if( $this.is("[data-autocomplete-ajax-html]") ){
+        autocomplete = new w.componentNamespace.AutoCompleteAjaxHtml( this, menu );
       } else {
         autocomplete = new w.componentNamespace.AutoCompleteDom( this, menu );
 
+        // if the form value on the data source changes, update the autocomplete input
         autocomplete.$domSource.on( "change", function() {
           var $this, text;
 
@@ -42,6 +45,6 @@
   };
 
   $( w.document ).on( "enhance", function(){
-    $( "[data-autocomplete], [data-autocomplete-dom]" ).autocomplete();
+    $( "[data-autocomplete], [data-autocomplete-dom], [data-autocomplete-ajax-html]" ).autocomplete();
   });
 })( this, this.jQuery);

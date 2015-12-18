@@ -28,7 +28,7 @@
           dest: 'dist/autocomplete-core.js'
         },
         all: {
-          src: ['src/core.js', 'src/dom.js', 'src/init.js'],
+          src: ['src/core.js', 'src/dom.js', 'src/ajax-html.js', 'src/init.js'],
           dest: 'dist/autocomplete.js'
         }
       },
