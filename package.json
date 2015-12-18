@@ -3,7 +3,7 @@
   "title": "auto-complete",
   "description": "A very small auto-complete component.",
   "homepage": "https://github.com/filamentgroup/auto-complete",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/filamentgroup/auto-complete.git"
