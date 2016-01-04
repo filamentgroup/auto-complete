@@ -88,9 +88,12 @@
     return compare.indexOf( val ) === 0;
   };
 
-  AutoComplete.prototype.filterData = function(data){
+  AutoComplete.prototype.filterData = function( data ){
     if( !data.length ) {
       return;
+    }
+    if( !this.isFiltered ) {
+      return data;
     }
     var val = this.val();
     if( !this.isCaseSensitive ) {

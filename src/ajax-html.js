@@ -40,7 +40,7 @@
 				var $el = $( "<div/>" ).html( data );
 				$el.find( self.selector ).each(function( i, elem ){
 					var $elem = $( elem );
-					if( self.compareDataItem( $elem, value ) ) {
+					if( !this.isFiltered || self.compareDataItem( $elem, value ) ) {
 						keep.push( $elem );
 					}
 				});
@@ -50,7 +50,7 @@
 	};
 
 	AutoCompleteAjaxHtml.prototype.fill = function( data ) {
-		var items = this.filterData(data);
+		var items = this.filterData( data );
 		var selectedText = this.menu.getSelectedElement().text();
 		var self = this;
 		var $list = this.menu.$element.find( "ol,ul" );
