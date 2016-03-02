@@ -9,7 +9,7 @@
   w.componentNamespace.AutoCompleteDom = AutoCompleteDom;
   $.extend(AutoCompleteDom.prototype, w.componentNamespace.AutoComplete.prototype);
 
-  AutoCompleteDom.prototype.fetch = function( callback ){
+  AutoCompleteDom.prototype.fetch = function( request, callback ){
     var value = this.$input.val().toLowerCase(), keep = [];
 
     this.$domSource.children().each($.proxy(function( i, elem ){

@@ -146,6 +146,7 @@
     // the user has changed the request since the suggest method was called so
     // we should ignore this, old request
     if( request !== this._requestId ) {
+      this.abortFetch();
       return;
     }
 

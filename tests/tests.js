@@ -280,12 +280,11 @@
 
       $instance.one("autocomplete:suggested", function() {
         ok(!instance.menu.opened, "menu closed");
+        start();
       });
 
       $instance.val( "bz" );
       $instance.trigger( "keyup" );
-
-      start();
     });
 
     $instance.val( "b" );
