@@ -49,6 +49,7 @@
   w.componentNamespace.AutoComplete = AutoComplete;
 
   AutoComplete.preventSubmitTimeout = 200;
+  AutoComplete.ajaxDelayTimeout = 100;
 
   AutoComplete.prototype.blur = function() {
     // use the best match when there is one
@@ -123,28 +124,31 @@
       return;
     }
 
-    this.abortFetch();
+    var request = ++this._requestId;
 
-    var request = this._requestId += 1;
-
-    this.fetch($.proxy(function( data ) {
-      // we have made another request, ignore this one
-      if( request !== this._requestId ) {
-        return;
-      }
-
-      this.render(typeof data === "string" ? JSON.parse(data): data);
-    }, this));
+    // let the request stack unwind so that other key presses can
+    // proceed to update the request id and thereby cancel this request
+    setTimeout($.proxy(function(){
+      this.fetch(request, $.proxy(function( data ) {
+        this.render(typeof data === "string" ? JSON.parse(data): data);
+      }, this));
+    }, this), AutoComplete.ajaxDelayTimeout);
   };
 
   AutoComplete.prototype.abortFetch = function() {
     // invalidate the current request value by incrementing the counter
-    this._requestId += 1;
+    this._requestId++;
 
     this.$input.trigger( name + ":aborted" );
   };
 
-  AutoComplete.prototype.fetch = function( success ) {
+  AutoComplete.prototype.fetch = function( request, success ) {
+    // the user has changed the request since the suggest method was called so
+    // we should ignore this, old request
+    if( request !== this._requestId ) {
+      return;
+    }
+
     $.ajax(this.url, {
       dataType: "json",
 
