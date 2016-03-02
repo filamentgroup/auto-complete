@@ -39,6 +39,27 @@ $( function(){ $(document).trigger("enhance"); } );
 
 See the [demo page](http://filamentgroup.github.io/auto-complete/) for examples.
 
+## Custom Comparison Logic
+
+The existing comparison (which is just a substring check) might be too simple. In this case you can replace the `compareDataItem` definition on the `AutoComplete` prototype to get the desired custom comparison functionality. For example if you wanted to consult another part of the DOM (eg an input) for information that might inform the filtering of auto complete data you might do the following:
+
+```javascript
+// data : String, a data item from the auto-complete data source (DOM or Ajax Req)
+// val : String, the value of the auto-complete input
+w.componentNamespace.AutoComplete.prototype.compareDataItem = function(data, val){
+  // get the extra constraint information from the DOM
+  var otherConstraint = $( ".some-input").val();
+  
+  // check if the value from the other input is a substring of the auto-complete data
+  // check if the value from the autocomplete input is a substring of the auto-complete data
+  // return true if both constraints are satsified
+  return data.indexOf(otherConstraint) > -1 && data.indexOf(val) > -1;
+}
+```
+
+As long this definition is executed after the auto-complete library is loaded/executed then this new method definition will determine the logic that plugin uses to filter the incomeing auto-complete data.
+
+**NOTE** that the component namespace is often defined per-project. If you have defined that to be something other than `componentNamespace` which is the default, you'll need to substitute that here.
 
 ## AUTO-complete
 
