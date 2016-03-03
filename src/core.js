@@ -119,7 +119,6 @@
     // before we start rendering, lets just check that the user hasn't
     // stopped everything and hide the suggestions if necessary
     if( !this.$input.val() ){
-      this.hideSuggest();
       this.abortFetch(true);
       return;
     }
@@ -137,6 +136,11 @@
 
   AutoComplete.prototype.abortFetch = function(skip) {
     if(skip) { this._requestId++; }
+
+    // on abort we should hide the menu if the input value is empty
+    if( !this.$input.val() ){
+      this.hideSuggest();
+    }
 
     this.$input.trigger( name + ":aborted" );
   };
