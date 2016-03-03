@@ -116,11 +116,11 @@
       return;
     }
 
-    // if at any point the suggest is requested with an empty input val
-    // stop everything and hide the suggestions.
+    // before we start rendering, lets just check that the user hasn't
+    // stopped everything and hide the suggestions if necessary
     if( !this.$input.val() ){
-      this.abortFetch(true);
       this.hideSuggest();
+      this.abortFetch(true);
       return;
     }
 
@@ -130,7 +130,7 @@
     // proceed to update the request id and thereby cancel this request
     setTimeout($.proxy(function(){
       this.fetch(request, $.proxy(function( data ) {
-        this.render(typeof data === "string" ? JSON.parse(data): data);
+        this.render(request, typeof data === "string" ? JSON.parse(data): data);
       }, this));
     }, this), AutoComplete.ajaxDelayTimeout);
   };
@@ -167,7 +167,14 @@
   // TODO this whole method is project specific due to returned json
   //      set this up so that render can be replaced or at least
   //      the data manip can be parameterized
-  AutoComplete.prototype.render = function( data ) {
+  AutoComplete.prototype.render = function( request, data ) {
+    // the user has changed the request since the suggest method was called so
+    // we should ignore this, old request
+    if( request !== this._requestId ) {
+      this.abortFetch();
+      return;
+    }
+
     data = data.location || data;
 
     this.matches = data;
