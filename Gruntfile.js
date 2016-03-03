@@ -54,10 +54,19 @@
           src: ['Gruntfile.js', 'src/*.js']
         }
       },
+
       watch: {
         src: {
           files: '<%= jshint.all.src %>',
           tasks: ['jshint:all', 'qunit']
+        }
+      },
+
+      copy: {
+        menu: {
+          files: [
+            { expand: true, cwd: "node_modules/fg-menu/src/", src: ["menu.*"], dest: "lib/ext/" }
+          ]
         }
       }
     });
@@ -65,13 +74,14 @@
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task.
-    grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat']);
-    grunt.registerTask('test', ['jshint', 'qunit']);
+    grunt.registerTask('default', ['copy', 'jshint', 'qunit', 'clean', 'concat']);
+    grunt.registerTask('test', ['copy', 'jshint', 'qunit']);
   };
 })();
