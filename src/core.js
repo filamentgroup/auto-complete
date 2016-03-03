@@ -119,7 +119,7 @@
     // if at any point the suggest is requested with an empty input val
     // stop everything and hide the suggestions.
     if( !this.$input.val() ){
-      this.abortFetch();
+      this.abortFetch(true);
       this.hideSuggest();
       return;
     }
@@ -135,10 +135,7 @@
     }, this), AutoComplete.ajaxDelayTimeout);
   };
 
-  AutoComplete.prototype.abortFetch = function() {
-    // invalidate the current request value by incrementing the counter
-    this._requestId++;
-
+  AutoComplete.prototype.abortFetch = function(skip) {
     this.$input.trigger( name + ":aborted" );
   };
 
