@@ -90,7 +90,7 @@
   module( "render", config );
 
   test( "populates and shows the menu", function() {
-    instance.render( [ "foo", "bar" ] );
+    instance.render( 0, [ "foo", "bar" ] );
 
     // visible
     ok( instance.menu.$element.is("[aria-hidden='false']") );
@@ -103,7 +103,7 @@
 
   test( "filters non-matches by default", function() {
     instance.$element.val( "foo" );
-    instance.render( [ "foo", "bar" ] );
+    instance.render( 0, [ "foo", "bar" ] );
 
     var $menuItems = instance.menu.$element.find("li");
     equal( $menuItems.length, 1 );
@@ -112,7 +112,7 @@
 
   test( "case insensitive by default", function() {
     instance.$element.val( "Foo" );
-    instance.render( [ "foo", "bar" ] );
+    instance.render( 0, [ "foo", "bar" ] );
 
     var $menuItems = instance.menu.$element.find("li");
     equal( $menuItems.eq( 0 ).text(), "foo" );
@@ -126,7 +126,7 @@
       start();
     });
 
-    instance.render( [ "foo", "bar" ] );
+    instance.render( 0, [ "foo", "bar" ] );
   });
 
   module( "showSuggest", config );
