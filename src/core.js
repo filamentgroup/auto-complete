@@ -136,7 +136,7 @@
   };
 
   AutoComplete.prototype.abortFetch = function(skip) {
-    if(skip) this._requestId++;
+    if(skip) { this._requestId++; }
 
     this.$input.trigger( name + ":aborted" );
   };
