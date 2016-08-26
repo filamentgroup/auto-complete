@@ -80,7 +80,10 @@
   };
 
   AutoComplete.prototype.select = function() {
-    this.val( this.strip(this.menu.selectActive() || "") );
+    var selectedCount =$(this.menu.element).find(".menu-selected").length;
+    if(selectedCount){//only close menu if a selection was made (clicks on scrollbar should not close menu)
+      this.val( this.strip(this.menu.selectActive() || "") );
+    }
   };
 
   AutoComplete.prototype.compareDataItem = function(item, val){
