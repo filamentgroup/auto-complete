@@ -42,7 +42,6 @@
     this.$input.attr( "spellcheck", "off" );
     this.$input.attr( "autocorrect", "off" );
     this.$input.attr( "autocapitalize", "off" );
-    //this.$input.data( "data-autocomplete-prevval", this.$input.val() );
 
     this.$input.attr( "aria-autocomplete", "list" );
     this.$input.attr( "aria-owns", this.menuID );
@@ -60,10 +59,7 @@
 
     this.spokenValue = this.$input.val();
     this.spokenValueID = "autocomplete-spokenvalue-" + this.idNum;
-    this.$helpSpan = $( '<span id="' + this.spokenValueID + '" class="autocomplete-spokenvalue a11y-only" aria-live="rude">' + this.spokenValue + '</span>' ).insertBefore( this.$input );
-
-
-
+    this.$helpSpan = $( '<span id="' + this.spokenValueID + '" class="autocomplete-spokenvalue a11y-only" aria-live="assertive"></span>' ).insertBefore( this.$input );
 
 
 
@@ -85,17 +81,22 @@
   AutoComplete.preventSubmitTimeout = 200;
   AutoComplete.ajaxDelayTimeout = 100;
 
+  AutoComplete.prototype.refreshHelpSpan = function( value ){
+    this.$helpSpan.html( "" );
+    this.$helpSpan.attr( "aria-live", "" );
+    this.$helpSpan.html( value );
+    this.$helpSpan.attr( "aria-live", "assertive" );
+  };
+
   AutoComplete.prototype.blur = function() {
     // use the best match when there is one
     if( this.isBestMatch && this.matches[0] ){
       this.$input.val( this.matches[0] );
-      this.$input.attr( "data-autocomplete-prevval", this.matches[0] );
     }
 
     // empty the field when there are no matches
     if( this.isEmptyNoMatch && !this.matches[0] ){
       this.$input.val("");
-      this.$input.attr( "data-autocomplete-prevval", "" );
     }
   };
 
@@ -107,20 +108,19 @@
       // Prevent the submit after a keydown for 200ms to avoid submission after hitting
       // enter to select a autocomplete menu item
       this.preventSubmit();
-      this.menu.keyDown(event);
-      value = this.menu.getSelectedElement().text();
+      value = this.menu.keyDown(event);
 
       if( value ){
         this.val( this.strip(value) );
-        this.$helpSpan.html( value );
       }
+      else{
+      this.refreshHelpSpan( "option " + this.menu.getSelectedElement().text() );
+    }
     }
   };
 
   AutoComplete.prototype.select = function() {
     this.val( this.strip(this.menu.selectActive() || "") );
-    this.$input.attr( "data-autocomplete-prevval", this.val() );
-    this.$helpSpan.html( this.menu.selectActive() );
   };
 
   AutoComplete.prototype.compareDataItem = function(item, val){
@@ -256,9 +256,10 @@
       value = this.strip(str);
       this.$input.trigger( name + ":set", { value: value } );
       this.$input.val( value );
+      this.refreshHelpSpan( "you selected " + value );
 
     } else {
-      return this.$input.attr( "data-autocomplete-prevval" ) || this.$input.val();
+      return this.$input.val();
     }
   };
 

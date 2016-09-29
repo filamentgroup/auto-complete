@@ -13,7 +13,12 @@
 	$.extend(AutoCompleteAjaxHtml.prototype, w.componentNamespace.AutoComplete.prototype);
 
 	AutoCompleteAjaxHtml.prototype.getItemText = function( $elem ) {
-		return $elem.find( this.valueSelector ).text();
+		if( this.valueSelector ){
+				return $elem.find( this.valueSelector ).text();
+		}
+		else {
+			return $elem.text();
+		}
 	};
 
 	AutoCompleteAjaxHtml.prototype.compareDataItem = function( $elem, val ) {
@@ -24,7 +29,7 @@
 		return this.getItemText( $elem ).toLowerCase().indexOf( val ) !== -1;
 	};
 
-	AutoCompleteAjaxHtml.prototype.fetch = function( callback ) {
+	AutoCompleteAjaxHtml.prototype.fetch = function( request, callback ) {
 		var value = this.$input.val().toLowerCase();
 		var self = this;
 
@@ -61,8 +66,8 @@
 
 		$.each( items, function( i, item ){
 			var $li = $( "<li/>" );
-			$li.attr( "tabindex", "-1" );
-			$li.attr( "role", "option" );
+			//$li.attr( "tabindex", "-1" );
+			//$li.attr( "role", "option" );
 
 			if( self.compareDataItem( item, selectedText ) ) {
 				$li.addClass( "menu-selected" );
@@ -84,7 +89,7 @@
 			this.$input.trigger( "autocomplete:set", { value: value } );
 			this.$input.val( value );
 		} else {
-			return this.$input.attr( "data-autocomplete-prevval" ) || this.$input.val();
+			return this.$input.val();
 		}
 	};
 

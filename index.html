@@ -8,6 +8,10 @@
       content: "No results.";
       font-style: italic;
     }
+    .a11y-only {
+      position: absolute;
+      left: -9999px;
+    }
     </style>
     <script src="lib/shoestring-dev.js"></script>
     <script src="lib/ext/menu.js"></script>
@@ -95,17 +99,20 @@
       <ul class="docs">
         <li>Menu (<a alt="repository" href="https://github.com/filamentgroup/menu">repository</a>)</li>
       </ul>
-    </div>
 
 
     <h2 class="docs">Ajax Response</h2>
 
-    <input data-autocomplete-ajax-html="sampleajax.html" data-filter-selector="li" data-value-selector="" data-autocomplete-helptext="Use down key to access and browse suggestions after input. Confirm your choice with enter key, or esc key to close suggestions box.">
+
+    <label class="autocomplete">
+    <input data-autocomplete-ajax-html="sampleajax.html" data-filter-selector="span" data-value-selector="" data-autocomplete-helptext="Use down key to access and browse suggestions after input. Confirm your choice with enter key, or esc key to close suggestions box.">
     <div class="suggest menu" data-menu>
       <ol>
       </ol>
     </div>
+  </label>
 
+  </div>
 
 
 
