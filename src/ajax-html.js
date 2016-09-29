@@ -84,7 +84,7 @@
 			this.$input.trigger( "autocomplete:set", { value: value } );
 			this.$input.val( value );
 		} else {
-			return this.$input.val();
+			return this.$input.attr( "data-autocomplete-prevval" ) || this.$input.val();
 		}
 	};
 
