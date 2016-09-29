@@ -53,11 +53,17 @@
 		var items = this.filterData( data );
 		var selectedText = this.menu.getSelectedElement().text();
 		var self = this;
+		this.menu.$element.removeAttr( "role" );
+		this.menu.$element.removeAttr( "aria-hidden" );
 		var $list = this.menu.$element.find( "ol,ul" );
 		$list.html("");
 
+
 		$.each( items, function( i, item ){
 			var $li = $( "<li/>" );
+			$li.attr( "tabindex", "-1" );
+			$li.attr( "role", "option" );
+
 			if( self.compareDataItem( item, selectedText ) ) {
 				$li.addClass( "menu-selected" );
 			}

@@ -19,8 +19,15 @@
       return;
     }
 
-    this.menu = menu;
     this.ignoreKeycodes = [];
+    this.idNum = new Date().getTime();
+
+    // menu ID for aria-owns
+    this.menu = menu;
+    this.menuID = this.menu.$element.attr( "id" ) || "autocomplete-menu-" + this.idNum;
+    this.menu.$element.attr( "id", this.menuID );
+    this.menu.$element.removeAttr( "role" );
+    this.menu.$element.find( "ol" ).attr( "role", "listbox" );
 
     // TODO it might be better to push this into the constructor of the menu to
     //      reduce dependency on the structure of the menu's keybinding reresentation
@@ -32,6 +39,33 @@
 
     this.$input.data( "autocomplete-component", this );
     this.$input.attr( "autocomplete", "off" );
+    this.$input.attr( "spellcheck", "off" );
+    this.$input.attr( "autocorrect", "off" );
+    this.$input.attr( "autocapitalize", "off" );
+    //this.$input.data( "data-autocomplete-prevval", this.$input.val() );
+
+    this.$input.attr( "aria-autocomplete", "list" );
+    this.$input.attr( "aria-owns", this.menuID );
+
+    this.inputID = this.$input.attr( "id" ) || "autocomplete-" + this.idNum;
+    if( !this.inputID ){
+      this.$input.attr( "id", this.inputID );
+    }
+
+    // helper span for usage description
+    this.helpText = this.$input.attr( "data-autocomplete-helptext" ) || "";
+    this.helpTextID = "autocomplete-helptext-" + this.idNum;
+    this.$helpSpan = $( '<span id="' + this.helpTextID + '" class="autocomplete-helptext a11y-only">' + this.helpText + '</span>' ).insertBefore( this.$input );
+    this.$input.attr( "aria-describedby", this.helpTextID );
+
+    this.spokenValue = this.$input.val();
+    this.spokenValueID = "autocomplete-spokenvalue-" + this.idNum;
+    this.$helpSpan = $( '<span id="' + this.spokenValueID + '" class="autocomplete-spokenvalue a11y-only" aria-live="rude">' + this.spokenValue + '</span>' ).insertBefore( this.$input );
+
+
+
+
+
 
     // TODO move to options object
     this.isFiltered = !this.$input.is( "[data-unfiltered]" );
@@ -55,11 +89,13 @@
     // use the best match when there is one
     if( this.isBestMatch && this.matches[0] ){
       this.$input.val( this.matches[0] );
+      this.$input.attr( "data-autocomplete-prevval", this.matches[0] );
     }
 
     // empty the field when there are no matches
     if( this.isEmptyNoMatch && !this.matches[0] ){
       this.$input.val("");
+      this.$input.attr( "data-autocomplete-prevval", "" );
     }
   };
 
@@ -71,16 +107,20 @@
       // Prevent the submit after a keydown for 200ms to avoid submission after hitting
       // enter to select a autocomplete menu item
       this.preventSubmit();
-      value = this.menu.keyDown(event);
+      this.menu.keyDown(event);
+      value = this.menu.getSelectedElement().text();
 
       if( value ){
         this.val( this.strip(value) );
+        this.$helpSpan.html( value );
       }
     }
   };
 
   AutoComplete.prototype.select = function() {
     this.val( this.strip(this.menu.selectActive() || "") );
+    this.$input.attr( "data-autocomplete-prevval", this.val() );
+    this.$helpSpan.html( this.menu.selectActive() );
   };
 
   AutoComplete.prototype.compareDataItem = function(item, val){
@@ -216,8 +256,9 @@
       value = this.strip(str);
       this.$input.trigger( name + ":set", { value: value } );
       this.$input.val( value );
+
     } else {
-      return this.$input.val();
+      return this.$input.attr( "data-autocomplete-prevval" ) || this.$input.val();
     }
   };
 
