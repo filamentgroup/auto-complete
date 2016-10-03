@@ -39,7 +39,11 @@
       $this.on( "keyup", $.proxy(autocomplete.suggest, autocomplete) );
       $this.on( "keydown", $.proxy(autocomplete.navigate, autocomplete) );
       $this.on( "blur", $.proxy(autocomplete.blur, autocomplete) );
-      menu.$element.on( "mouseup", $.proxy(autocomplete.select, autocomplete) );
+
+      // NOTE we can't close on `mouseup` in case there's overflow scrolling
+      // because the `mouseup` event is fired when using the scrollbar
+      menu.$element.on( "click", $.proxy(autocomplete.select, autocomplete) );
+
       menu.init();
     });
   };

@@ -20,7 +20,7 @@
     "test": "grunt test --verbose"
   },
   "dependencies": {
-    "fg-menu": "^0.1.2"
+    "fg-menu": "filamentgroup/Menu#auto-complete-12"
   },
   "devDependencies": {
     "grunt-cli": "~0.1",
