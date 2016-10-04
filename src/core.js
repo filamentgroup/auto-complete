@@ -114,7 +114,7 @@
         this.val( this.strip(value) );
       }
       else{
-      this.refreshHelpSpan( "option " + this.menu.getSelectedElement().text() );
+      this.refreshHelpSpan( this.menu.getSelectedElement().text() );
     }
     }
   };
@@ -256,7 +256,7 @@
       value = this.strip(str);
       this.$input.trigger( name + ":set", { value: value } );
       this.$input.val( value );
-      this.refreshHelpSpan( "you selected " + value );
+      this.refreshHelpSpan( "Selected " + value );
 
     } else {
       return this.$input.val();
