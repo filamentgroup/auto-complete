@@ -35,6 +35,10 @@
       this.ignoreKeycodes.push( parseInt( key, 10 ) );
     }
 
+    // make sure tab key does not rove focus within the menu
+    delete menu.keycodes[ "9" ];
+
+
     this.url = this.$element.attr( "data-autocomplete" );
 
     this.$input.data( "autocomplete-component", this );
