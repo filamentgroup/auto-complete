@@ -29,6 +29,7 @@
     this.menu.$element.removeAttr( "role" );
     this.menu.$element.find( "ol" ).attr( "role", "listbox" );
 
+
     // TODO it might be better to push this into the constructor of the menu to
     //      reduce dependency on the structure of the menu's keybinding reresentation
     for( var key in menu.keycodes ) {
@@ -55,15 +56,9 @@
       this.$input.attr( "id", this.inputID );
     }
 
-    // helper span for usage description
-    this.helpText = this.$input.attr( "data-autocomplete-helptext" ) || "";
-    this.helpTextID = "autocomplete-helptext-" + this.idNum;
-    this.$helpSpan = $( '<span id="' + this.helpTextID + '" class="autocomplete-helptext a11y-only">' + this.helpText + '</span>' ).insertBefore( this.$input );
-    this.$input.attr( "aria-describedby", this.helpTextID );
-
     this.spokenValue = this.$input.val();
     this.spokenValueID = "autocomplete-spokenvalue-" + this.idNum;
-    this.$helpSpan = $( '<span id="' + this.spokenValueID + '" class="autocomplete-spokenvalue a11y-only" aria-live="assertive"></span>' ).insertBefore( this.$input );
+    this.$helpSpan = $( '<span id="' + this.spokenValueID + '" class="autocomplete-spokenvalue a11y-only" role="region" aria-live="assertive"></span>' ).insertBefore( this.$input );
 
 
 
@@ -86,6 +81,7 @@
   AutoComplete.ajaxDelayTimeout = 100;
 
   AutoComplete.prototype.refreshHelpSpan = function( value ){
+    this.$helpSpan.css( "display", "block" );
     this.$helpSpan.html( "" );
     this.$helpSpan.attr( "aria-live", "" );
     this.$helpSpan.html( value );
@@ -93,6 +89,7 @@
   };
 
   AutoComplete.prototype.blur = function() {
+    this.$helpSpan.css( "display", "none" );
     // use the best match when there is one
     if( this.isBestMatch && this.matches[0] ){
       this.$input.val( this.matches[0] );
@@ -240,12 +237,14 @@
   AutoComplete.prototype.showSuggest = function() {
     this._isSuggestShown = true;
     this.menu.open();
+    this.$input.attr( "aria-expanded", "true" );
     this.$input.trigger( name + ":shown" );
   };
 
   AutoComplete.prototype.hideSuggest = function() {
     this._isSuggestShown = false;
     this.menu.close();
+    this.$input.attr( "aria-expanded", "false" );
     this.$input.trigger( name + ":hidden" );
   };
 
