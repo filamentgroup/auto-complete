@@ -20,7 +20,7 @@
     "test": "grunt test --verbose"
   },
   "dependencies": {
-    "fg-menu": "^0.1.2"
+    "fg-menu": "^0.1.4"
   },
   "devDependencies": {
     "grunt-cli": "~0.1",
