@@ -67,7 +67,7 @@
 		$.each( items, function( i, item ){
 			var $li = $( "<li/>" );
 			//$li.attr( "tabindex", "-1" );
-			//$li.attr( "role", "option" );
+			$li.attr( "role", "option" );
 
 			if( self.compareDataItem( item, selectedText ) ) {
 				$li.addClass( "menu-selected" );
